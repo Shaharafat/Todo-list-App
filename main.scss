@@ -1,0 +1,109 @@
+@import './src/styles/config';
+
+//? => Basic Formatting...
+body {
+  height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div,
+section,
+form,
+ul,
+li,
+ol,
+table,
+textarea,
+input,
+section,
+main,
+nav,
+footer,
+header,
+body,
+button,
+i,
+html {
+  margin: 0;
+  padding: 0;
+}
+
+// ? => main styling...
+.container {
+  height: 100%;
+  background-image: linear-gradient(120deg, #ECE710, #03AC94);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 1.7rem;
+    color: #fff;
+    margin: 15vh 0;
+  }
+
+  .form-group {
+    // width: 50%;
+    display: flex;
+    margin-bottom: 4rem;
+    justify-content: center;
+
+    input,
+    button {
+      @include inputButtonStyle;
+    }
+
+    button {
+      color: rgb(255, 153, 20);
+      background-color: #fff;
+      transition: 300ms ease-out all;
+
+      &:hover {
+        background-color: rgb(255, 153, 20);
+        color: #fff;
+      }
+    }
+  }
+
+  // => styling todo items...
+  .todo-list-item {
+    display: flex;
+
+    input,
+    button {
+      @include inputButtonStyle;
+    }
+
+    #todo-complete {
+      background-color: rgb(27, 243, 27);
+      color: #fff;
+    }
+
+    #todo-delete {
+      background-color: rgb(255, 153, 20);
+      color: #fff;
+    }
+
+    .fa-check,
+    .fa-trash-alt {
+      pointer-events: none;
+    }
+  }
+
+  .complete{
+    transform: translateX(200%);
+    opacity: 0;
+    transition: all 1s ease-in-out;
+  }
+
+}
