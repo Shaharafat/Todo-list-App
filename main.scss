@@ -6,7 +6,6 @@ body {
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
-
 }
 
 h1,
@@ -53,14 +52,33 @@ html {
   }
 
   .form-group {
-    // width: 50%;
     display: flex;
     margin-bottom: 4rem;
     justify-content: center;
 
     input,
-    button {
+    button,
+    select {
       @include inputButtonStyle;
+    }
+
+    .search-box {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin-left: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      color: #40BC72;
+      position: relative;
+
+      option::after {
+        content: "\25BC";
+        position: absolute;
+        top: 0;
+        color: black;
+        background-color: #40BC72;
+      }
     }
 
     button {
@@ -73,23 +91,31 @@ html {
         color: #fff;
       }
     }
+
+
+
+  }
+
+  .shake {
+    animation: shake .2s linear;
   }
 
   // => styling todo items...
   .todo-list-item {
     display: flex;
+    margin-bottom: 1.5rem;
 
     input,
     button {
       @include inputButtonStyle;
     }
 
-    #todo-complete {
+    .todo-complete {
       background-color: rgb(27, 243, 27);
       color: #fff;
     }
 
-    #todo-delete {
+    .todo-delete {
       background-color: rgb(255, 153, 20);
       color: #fff;
     }
@@ -100,10 +126,14 @@ html {
     }
   }
 
-  .complete{
-    transform: translateX(200%);
-    opacity: 0;
-    transition: all 1s ease-in-out;
+  .complete {
+    animation: getOut .8s ease-in;
   }
+
+  .done {
+    text-decoration: line-through;
+    opacity: .5;
+  }
+
 
 }

@@ -5,3 +5,47 @@
   background: #fff;
   outline: none;
 }
+
+// ?=> delete animation
+@keyframes getOut {
+  0% {
+    transform: translateX(0);
+    transition-timing-function: ease-in;
+  }
+
+  30% {
+    transform: translateX(-15px);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(10px)
+  }
+
+  30% {
+    transform: translateX(-10px);
+  }
+
+  50% {
+    transform: translateX(10px);
+  }
+
+  70% {
+    translate: translateX(-10px);
+  }
+
+  90% {
+    translate: translateX(10px);
+  }
+
+  100% {
+    translate: translateX(0px);
+  }
+}
