@@ -2,49 +2,71 @@ import './main.scss'
 
 let addData = document.querySelector('.add-data')
 let inputForm = document.querySelector('.form-group')
-console.log(inputForm);
-
 let inputData = document.querySelector('.input-field')
-let getContainer = document.querySelector('.container')
+let searchBox = document.querySelector('.search-box')
+let todoList = document.querySelector('.todo-item')
+let todoListContainer = document.querySelector('.todo-list')
+
+
 
 addData.addEventListener('click', function (event) {
   event.preventDefault()
-
+  //? => check before add the box is empty or not...
   if (inputData.value != false) {
-    let newItem = document.createElement('form');
+    //? => item div
+    let newItem = document.createElement('div');
     newItem.classList.add('todo-list-item')
 
-    let todoText = document.createElement('input')
+    //?=> li element
+    let todoText = document.createElement('li')
     todoText.classList.add('todo-text')
-    todoText.setAttribute('type', 'text')
-    todoText.setAttribute('readonly', 'true')
-    todoText.value = inputData.value
+    todoText.innerText = inputData.value
     inputData.value = ""
     newItem.appendChild(todoText)
 
-
+    //? => Complete icon..
     let todoComplete = document.createElement('button')
     todoComplete.classList.add('todo-complete')
-
+    todoComplete.innerHTML = '<i class="fas fa-check"></i>'
     newItem.appendChild(todoComplete)
 
-    let tik = document.createElement('i');
-    tik.classList.add('fas')
-    tik.classList.add('fa-check')
-    todoComplete.appendChild(tik)
-
+    //? => Delete icon...
     let todoDelete = document.createElement('button')
     todoDelete.classList.add('todo-delete')
-
+    todoDelete.innerHTML = '<i class="fas fa-trash-alt"></i>'
     newItem.appendChild(todoDelete)
 
-    let del = document.createElement('i');
-    del.classList.add('fas')
-    del.classList.add('fa-trash-alt')
-    todoDelete.appendChild(del)
-    getContainer.appendChild(newItem)
+    todoList.appendChild(newItem)
 
+    searchBox.addEventListener('click', function (e) {
+      let todos = todoList.childNodes
+      todos.forEach(function (todo) {
+        switch (e.target.value) {
+          case "all": {
+            todo.style.display = "flex"
+            break;
+          }
+          case "completed": {
+            if (todo.classList.contains("done")) {
+              todo.style.display = "flex"
+            } else {
+              todo.style.display = "none"
+            }
+            break;
+          }
+          case "uncompleted": {
+            if (!todo.classList.contains("done")) {
+              todo.style.display = "flex"
+            } else {
+              todo.style.display = "none"
+            }
+            break;
+          }
+        }
+      })
+    })
 
+    //? => Delete functionalities...
     todoDelete.addEventListener('click', function (event) {
       event.preventDefault();
       let getBlock = event.target.parentElement;
@@ -56,39 +78,19 @@ addData.addEventListener('click', function (event) {
       })
     })
 
+    //? => complete functionalities...
     todoComplete.addEventListener('click', function (event) {
       event.preventDefault()
-      let getBlock = event.target.parentElement.children[0];
+      let getBlock = event.target.parentElement;
 
       getBlock.classList.toggle('done')
     })
+
   } else {
     inputForm.classList.toggle('shake');
-    console.log(inputForm.classList[1]);
     inputForm.addEventListener('animationend', function (event) {
       let classes = [...inputForm.classList].splice(0, 1);
       inputForm.classList = classes;
     })
   }
 })
-
-
-// let deleteBtn = document.querySelector('.todo-delete')
-// let doneBtn = document.querySelector('.todo-complete')
-
-// deleteBtn.addEventListener('click', function (event) {
-//   event.preventDefault();
-//   let getBlock = event.target.parentElement;
-//   getBlock.classList.toggle('complete')
-//   getBlock.addEventListener('transitionend', function () {
-//     getBlock.remove()
-//   })
-// })
-
-// doneBtn.addEventListener('click', function (event) {
-//   event.preventDefault()
-//   let getBlock = event.target.parentElement.children[0];
-//   console.log(getBlock);
-
-//   getBlock.classList.toggle('done')
-// })

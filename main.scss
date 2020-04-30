@@ -56,9 +56,24 @@ html {
     margin-bottom: 4rem;
     justify-content: center;
 
+    .search {
+      position: relative;
+      
+      &::after {
+        // content: "\f002";
+        content: "\25BC";
+        // font-family: 'Font Awesome 5 Free';
+        position: absolute;
+        right: 7px;
+        top: 13px;
+        color: #40BC72;
+        pointer-events: none;
+      }
+    }
+
     input,
     button,
-    select {
+    .search-box {
       @include inputButtonStyle;
     }
 
@@ -66,19 +81,13 @@ html {
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+      width: 140px;
+      height: 100%;
       margin-left: 10px;
       font-size: 1rem;
       cursor: pointer;
       color: #40BC72;
       position: relative;
-
-      option::after {
-        content: "\25BC";
-        position: absolute;
-        top: 0;
-        color: black;
-        background-color: #40BC72;
-      }
     }
 
     button {
@@ -91,9 +100,6 @@ html {
         color: #fff;
       }
     }
-
-
-
   }
 
   .shake {
@@ -101,39 +107,49 @@ html {
   }
 
   // => styling todo items...
-  .todo-list-item {
-    display: flex;
-    margin-bottom: 1.5rem;
+  .todo-list {
+    min-width: 30%;
 
-    input,
-    button {
-      @include inputButtonStyle;
+    .todo-list-item {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+
+      li,
+      button {
+        @include inputButtonStyle;
+      }
+
+      .todo-text {
+        list-style-type: none;
+        flex: 1;
+      }
+
+      .todo-complete {
+        background-color: rgb(27, 243, 27);
+        color: #fff;
+      }
+
+      .todo-delete {
+        background-color: rgb(255, 153, 20);
+        color: #fff;
+      }
+
+      .fa-check,
+      .fa-trash-alt {
+        pointer-events: none;
+      }
     }
 
-    .todo-complete {
-      background-color: rgb(27, 243, 27);
-      color: #fff;
+    .complete {
+      animation: getOut .8s ease-in;
     }
 
-    .todo-delete {
-      background-color: rgb(255, 153, 20);
-      color: #fff;
-    }
-
-    .fa-check,
-    .fa-trash-alt {
-      pointer-events: none;
+    .done {
+      text-decoration: line-through;
+      opacity: .5;
     }
   }
-
-  .complete {
-    animation: getOut .8s ease-in;
-  }
-
-  .done {
-    text-decoration: line-through;
-    opacity: .5;
-  }
-
-
 }
+
+@import './src/styles/responsive'

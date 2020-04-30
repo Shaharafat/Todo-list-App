@@ -1,0 +1,38 @@
+@media screen and (max-width:1280px) {
+  .container{
+    .todo-list {
+      min-width: 40%;
+    }
+  }
+}
+
+@media screen and (max-width:900px) {
+  .container {
+    & .todo-list {
+      min-width: 50%;
+    }
+  }
+}
+
+@media screen and (max-width:900px) {
+  .container {
+    & .todo-list {
+      min-width: 65%;
+    }
+  }
+}
+
+@media screen and (max-width:490px) {
+  .container{
+    .todo-list{
+      min-width: 70%;
+    }
+    .form-group {
+      flex-wrap: wrap;
+  
+      .search {
+        margin-top: 1rem;
+      }
+    }
+  }
+}

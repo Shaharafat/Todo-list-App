@@ -16,31 +16,33 @@
     <form action="" class="form-group">
       <input type="text" class="input-field" name="input-field" placeholder="Type Here...">
       <button class="add-data"><i class="fas fa-plus-square plus-icon"></i></button>
-      <select name="" id="" class="search-box">
-        <option value="All">All</option>
-        <option value="Completed">Completed</option>
-        <option value="Uncompleted">Uncompleted</option>
-      </select>
+      <div class="search">
+        <select name="todos" class="search-box">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="uncompleted">Uncompleted</option>
+        </select>
+      </div>
     </form>
 
-    <!-- <form action="" class="todo-list-item">
-      <input type="text" class="todo-text" value="Text.." readonly>
-      <button class="todo-complete"><i class="fas fa-check"></i></button>
-      <button class="todo-delete"><i class="fas fa-trash-alt"></i></button>
-    </form>
-
-    <form action="" class="todo-list-item">
-      <input type="text" class="todo-text" value="Text2" readonly>
-      <button class="todo-complete"><i class="fas fa-check"></i></button>
-      <button class="todo-delete"><i class="fas fa-trash-alt"></i></button>
-    </form> -->
+    <div class="todo-list">
+      <ul class="todo-item"></ul>
+    </div>
+    <!-- <div class="todo-list-item">
+      <li class="todo-text"></li>
+      <button class="todo-complete"></button>
+      <button class="todo-delete"></button>
+    </div> -->
   </section>
 
   <!-- SCRIPTS -->
 
   <script src="./app.js"></script>
+
   <!-- FontAwesome CDN -->
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+
 </body>
 
 </html>
