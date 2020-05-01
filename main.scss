@@ -46,7 +46,7 @@ html {
   align-items: center;
 
   h1 {
-    font-size: 1.7rem;
+    font-size: 2rem;
     color: #fff;
     margin: 15vh 0;
   }
@@ -58,7 +58,7 @@ html {
 
     .search {
       position: relative;
-      
+
       &::after {
         // content: "\f002";
         content: "\25BC";

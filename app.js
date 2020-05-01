@@ -5,14 +5,12 @@ let inputForm = document.querySelector('.form-group')
 let inputData = document.querySelector('.input-field')
 let searchBox = document.querySelector('.search-box')
 let todoList = document.querySelector('.todo-item')
-let todoListContainer = document.querySelector('.todo-list')
 
+if (localStorage.getItem('todos') !== null) {
+  let todoArray = JSON.parse(localStorage.getItem('todos'))
 
-
-addData.addEventListener('click', function (event) {
-  event.preventDefault()
-  //? => check before add the box is empty or not...
-  if (inputData.value != false) {
+  //? ==> creating list using local storages data...
+  todoArray.forEach(function (value) {
     //? => item div
     let newItem = document.createElement('div');
     newItem.classList.add('todo-list-item')
@@ -20,8 +18,7 @@ addData.addEventListener('click', function (event) {
     //?=> li element
     let todoText = document.createElement('li')
     todoText.classList.add('todo-text')
-    todoText.innerText = inputData.value
-    inputData.value = ""
+    todoText.innerText = value
     newItem.appendChild(todoText)
 
     //? => Complete icon..
@@ -69,8 +66,9 @@ addData.addEventListener('click', function (event) {
     //? => Delete functionalities...
     todoDelete.addEventListener('click', function (event) {
       event.preventDefault();
-      let getBlock = event.target.parentElement;
-      console.log(getBlock);
+      let getBlock = event.target.parentElement
+      let grabDelValue = getBlock.childNodes[0].innerText
+      delTodo(grabDelValue)
 
       getBlock.classList.toggle('complete')
       getBlock.addEventListener('animationend', function () {
@@ -85,7 +83,63 @@ addData.addEventListener('click', function (event) {
 
       getBlock.classList.toggle('done')
     })
+  })
 
+}
+
+//? => Adding new data....
+addData.addEventListener('click', function (event) {
+  event.preventDefault()
+  //? => check before add the box is empty or not...
+  if (inputData.value != false) {
+    //? => item div
+    let newItem = document.createElement('div');
+    newItem.classList.add('todo-list-item')
+
+    //?=> li element
+    let todoText = document.createElement('li')
+    todoText.classList.add('todo-text')
+    todoText.innerText = inputData.value
+    saveTodo(inputData.value)
+    inputData.value = ""
+    newItem.appendChild(todoText)
+
+    //? => Complete icon..
+    let todoComplete = document.createElement('button')
+    todoComplete.classList.add('todo-complete')
+    todoComplete.innerHTML = '<i class="fas fa-check"></i>'
+    newItem.appendChild(todoComplete)
+
+    //? => Delete icon...
+    let todoDelete = document.createElement('button')
+    todoDelete.classList.add('todo-delete')
+    todoDelete.innerHTML = '<i class="fas fa-trash-alt"></i>'
+    newItem.appendChild(todoDelete)
+
+    //? => Append item to list...
+    todoList.appendChild(newItem)
+
+
+    //? => Delete functionalities...
+    todoDelete.addEventListener('click', function (event) {
+      event.preventDefault();
+      let getBlock = event.target.parentElement
+      let grabDelValue = getBlock.childNodes[0].innerText
+      delTodo(grabDelValue)
+
+      getBlock.classList.toggle('complete')
+      getBlock.addEventListener('animationend', function () {
+        getBlock.remove()
+      })
+    })
+
+    //? => complete functionalities...
+    todoComplete.addEventListener('click', function (event) {
+      event.preventDefault()
+      let getBlock = event.target.parentElement;
+
+      getBlock.classList.toggle('done')
+    })
   } else {
     inputForm.classList.toggle('shake');
     inputForm.addEventListener('animationend', function (event) {
@@ -94,3 +148,29 @@ addData.addEventListener('click', function (event) {
     })
   }
 })
+
+
+//? => Todo storing functionalities...
+function saveTodo(data) {
+  let todos;
+
+  if (localStorage.getItem("todos") === null) {
+    todos = []
+  } else {
+    todos = JSON.parse(localStorage.getItem("todos"))
+  }
+  if (data) {
+    todos.push(data)
+  }
+  localStorage.setItem("todos", JSON.stringify(todos))
+}
+
+//? => delete deleted todos from localStorage...
+function delTodo(data) {
+  let newTodo;
+  newTodo = JSON.parse(localStorage.getItem('todos'));
+  let getInd = JSON.parse(localStorage.getItem('todos')).indexOf(data)
+  newTodo.splice(getInd, 1);
+  localStorage.clear();
+  localStorage.setItem('todos', JSON.stringify(newTodo))
+}
